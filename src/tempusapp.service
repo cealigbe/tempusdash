@@ -1,0 +1,13 @@
+[Unit]
+Description=Tempus Manager App Service
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/home/tempus/tempus-db/manage/app.py
+User=tempus
+WorkingDirectory=/home/tempus/tempus-db/manage
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

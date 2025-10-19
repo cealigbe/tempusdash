@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+<title>
+  {% block title %}Photo Display{% endblock %}
+</title>
+
+{% block content %}
+  <section id="image-display" class="container">
+    <header class="section-header">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <ul class="flashes">
+          {% for cat, msg in messages %}
+            <li class="{{ cat }}">
+              {% if cat == "error" %}Error: {%endif%} {{ msg }}
+            </li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      {% endwith %}
+
+      <p>
+        <a href="{{ url_for('index') }}" class="back-link">
+          &lt; Back to Home
+        </a>
+      </p>
+      <br />
+      <h2>
+        Display a Photo
+      </h2>
+      <p>Select or upload an image file to display.</p>
+    </header>
+
+    <ul class="gallery">
+      {% for img in images %}
+      <li class="gallery-item">
+        <img src="{{ url_for('serve_uploads', filename=img) }}" alt="{{ img }}">
+        <div class="gallery-item-content">
+          <p>Filename: {{ img }}</p>
+          <button class="display-btn" data-route="/showphoto/{{ img }}">Display</button>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+
+    <br />
+
+    <form action="/upload" method="post" enctype="multipart/form-data">
+      <h2>Upload a Photo</h2>
+      <input type="file" name="file" accept="image/*" id="image-upload">
+      <button class="upload-btn" type="submit">Upload Image</button>
+    </form>
+
+  </section>
+{% endblock %}

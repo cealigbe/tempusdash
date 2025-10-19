@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Tempus DB Manager</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" >
+</head>
+
+<body>
+	<main id="main">
+		<header id="header">
+			<h1>Tempus Dashboard Manager</h1>
+
+			<hr />
+		</header>
+
+		<section id="dash-status">
+      <h3>Currently Active Plugin</h3>
+      <p class="status">
+        {{ status.name }}, last run: {{ status.last_run }}
+      </p>
+		</section>
+
+		<section id="tilegrid">
+			{% for button in buttons %}
+				<button class="tile" id="{{ button.id }}" data-route="{{ button.route }}">
+					<img src="{{ url_for('static', filename='img/' + button.icon) }}" alt="{{ button.id }}">
+					<span>
+						{{ button.text }}
+					</span>
+				</button>
+			{% endfor %}
+		</section>
+
+		<footer id="footer">
+			<hr />
+			<p>Tempus DB version 1.0.0 - by Chuck Aligbe</p>
+		</footer>
+	</main>
+
+	<dialog id="settings">
+		<h2>Dashboard Settings</h2>
+
+		<form method="dialog">
+			<label for="timer">Dashboard Refresh Time (mins)</label>
+			<input type="number" name="timer" id="timer" value="10" min="5" max="60" />
+
+			<div class="action-area">
+				<button class="close danger" value="close">Close</button>
+				<button id="save" value="save">Save</button>
+			</div>
+		</form>
+	</dialog>
+
+	<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>

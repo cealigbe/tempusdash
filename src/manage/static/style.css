@@ -1,0 +1,370 @@
+@import url("font/satoshi.css");
+
+/* ---
+  TEMPUS DASH CSS
+  BY CHUCK ALIGBE
+--- */
+
+/* --- CSS RESET --- */
+
+/* 1. Use a more-intuitive box-sizing model */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* 2. Remove default margin */
+* {
+  margin: 0;
+}
+
+/* 3. Enable keyword animations */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    interpolate-size: allow-keywords;
+  }
+}
+
+body {
+  /* 4. Add accessible line-height */
+  line-height: 1.5;
+  /* 5. Improve text rendering */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 6. Improve media defaults */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* 7. Inherit fonts for form controls */
+input, button, textarea, select {
+  font: inherit;
+}
+
+/* 8. Avoid text overflows */
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+/* 9. Improve line wrapping */
+p {
+  text-wrap: pretty;
+}
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+  font-weight: 900;
+}
+
+/*
+  10. Create a root stacking context
+*/
+#root, #__next {
+  isolation: isolate;
+}
+
+/* --- APP GLOBAL STYLES --- */
+
+
+/* Top Level Styles */
+
+root {
+  font-size: 16px;
+}
+
+body {
+  font-family: "Satoshi", Arial, Helvetica, sans-serif;
+  color: #333;
+  background-color: #fff;
+  height: 100vh;
+  font-weight: 600;
+}
+
+main {
+  padding: 1rem;
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+main > header {
+  padding: 1rem 0;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+h1 {
+  font-size: 2rem;
+  text-align: center;
+}
+
+a {
+  font-weight: 600;
+  text-decoration: none;
+  color: hsl(210, 100%, 50%);
+  transition: color 0.25s;
+}
+
+a:hover, a:focus {
+  color: hsl(210, 100%, 65%);
+}
+
+hr {
+  appearance: none;
+  margin: 0.5rem 0;
+  border-top: 1px solid #ccc;
+}
+
+/* Form Component Styles */
+
+:is(button, input[type="submit"], a.button) {
+  background-color: #f6f6f6;
+  color: #333;
+  padding-inline: 1rem;
+  border: 2px solid #333;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  min-height: 3rem;
+  transition: all 0.25s ease;
+}
+
+:is(button, input[type="submit"], a.button):hover,
+:is(button, input[type="submit"], a.button):focus {
+  background-color: #ccc;
+}
+
+:is(button, input[type="submit"], a.button):active {
+  background-color: #aaa;
+}
+
+:is(button, input[type="submit"], a.button).danger {
+  color: #c33;
+  border-color: #c33;
+}
+
+input:not([type="submit"], [type="radio"], [type="checkbox"], [type="file"]) {
+  border: 2px solid #333;
+  border-radius: 0.5rem;
+  min-height: 3rem;
+  padding: 2px 0.5rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+section.container {
+  width: 100%;
+  max-width: 50rem;
+  margin: 0 auto 2rem;
+}
+
+.section-header {
+  padding-bottom: 2rem;
+}
+
+a.back-link {
+  padding: 1rem 0;
+}
+
+ul.flashes {
+  list-style: none;
+  margin: 0 0 2rem;
+  padding: 0;
+}
+
+.flashes li {
+  margin-bottom: 0.5rem;
+  padding: 1rem;
+  background-color: hsl(210, 100%, 90%);
+  color: hsl(210, 100%, 30%);
+  border-radius: 0.25rem;
+}
+
+.flashes li.error {
+  background-color: hsl(10, 100%, 90%);
+  color: hsl(10, 100%, 30%);
+}
+
+#dash-status {
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+#tilegrid {
+  display: grid;
+  grid-template-columns: repeat( auto-fit, minmax(15rem, 1fr) );
+  gap: 0.75rem;
+  align-content: flex-start;
+  flex-grow: 1;
+  padding: 1rem 0;
+
+  button, a.button {
+    width: 100%;
+    text-align: left;
+    height: 6rem;
+    padding: 1rem 1rem;
+  }
+
+  :is(button, a.button) img {
+    margin-bottom: 0.25rem;
+  }
+}
+
+#image-display {
+  flex-grow: 1;
+}
+
+ul.gallery {
+  list-style: none;
+  margin: 0 0 2rem;
+  padding: 0;
+}
+
+li.gallery-item {
+  display: flex;
+  padding: 1rem 0;
+  align-items: center;
+  border-bottom: 2px solid #eee;
+
+  & img {
+    object-fit: cover;
+    width: 8rem;
+    aspect-ratio: 1;
+    margin-right: 1rem;
+    border: 2px solid #eee;
+    border-radius: 0.5rem;
+  }
+
+  & .gallery-item-content {
+    flex-grow: 1;
+  }
+
+  & p {
+    margin-bottom: 0.5rem;
+  }
+
+  & button {
+    min-width: 8rem;
+  }
+}
+
+input[type="file"] {
+  display: block;
+  width: min(100%, 30rem);
+  padding: 2rem;
+  margin: 1rem 0 2rem;
+  background-color: #eee;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+
+input[type="file"]::file-selector-button,
+input[type="file"]::-webkit-file-upload-button {
+  background-color: #f6f6f6;
+  margin-right: 0.75rem;
+  padding-inline: 1rem;
+  border: 2px solid #333;
+  border-radius: 0.5rem;
+  min-height: 3rem;
+  transition: all 0.25s ease;
+  font: inherit;
+  cursor: pointer;
+}
+
+input[type="file"]::file-selector-button:hover,
+input[type="file"]::-webkit-file-upload-button:hover,
+input[type="file"]::file-selector-button:focus,
+input[type="file"]::-webkit-file-upload-button:focus {
+  background-color: #ccc;
+}
+
+input[type="file"]::file-selector-button:active,
+input[type="file"]::-webkit-file-upload-button:active {
+  background-color: #aaa;
+}
+
+main > footer {
+  font-size: 0.875rem;
+  font-weight: 500;
+  min-height: 3.5rem;
+  text-align: center;
+  background-color: #fff;
+  flex-grow: 0;
+  flex-shrink: 0;
+
+}
+
+/* Dialog Styles */
+
+dialog {
+  width: 25rem;
+  padding: 1.5rem;
+  margin: 0 auto;
+  top: 30%;
+  background-color: #eee;
+  border: 2px solid #333;
+  border-radius: 1rem;
+
+  h2 {
+    margin-bottom: 1rem;
+  }
+
+  input {
+    width: 100%;
+  }
+}
+
+dialog .action-area {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+
+  & > button {
+    flex-grow: 1;
+  }
+}
+
+dialog#spinner {
+  text-align: center;
+
+  & .loader {
+    margin: 0 auto;
+  }
+}
+
+dialog::backdrop {
+  background-color: hsla(0, 0%, 15%, 0.4);
+}
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 45px;
+  aspect-ratio: 1;
+  --c: no-repeat linear-gradient(#000 0 0);
+  background:
+    var(--c) 0%   50%,
+    var(--c) 50%  50%,
+    var(--c) 100% 50%;
+  background-size: 20% 100%;
+  animation: l1 1s infinite linear;
+}
+@keyframes l1 {
+  0%  {background-size: 20% 100%,20% 100%,20% 100%}
+  33% {background-size: 20% 10% ,20% 100%,20% 100%}
+  50% {background-size: 20% 100%,20% 10% ,20% 100%}
+  66% {background-size: 20% 100%,20% 100%,20% 10% }
+  100%{background-size: 20% 100%,20% 100%,20% 100%}
+}
+
+@media screen and (min-width: 30rem) {
+  #tilegrid button, #tilegrid a.button {
+
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+}

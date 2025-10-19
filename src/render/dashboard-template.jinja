@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="style.css">
+	<title>Tempus Dash</title>
+</head>
+
+<body>
+	<main>
+		<section id="calclock">
+			<div class="dayloader">
+				<h2>Dayloader Clock</h2>
+				
+				<div class="graph">
+					<div class="track">
+						<div class="mask">
+							<div class="bar" style="width: {{ time_pct }}%;">&nbsp;</div>
+							<div class="gridlines">
+								{% for i in range(25) %}
+									{% if i >= (time_pct * 24/100 - 0.0002)|round(0, "ceil") %}
+										<div class="line hidden"></div>
+									{% else %}
+										<div class="line"></div>
+									{% endif %}
+								{% endfor %}
+							</div>
+						</div>
+					</div>
+
+					<div class="ticks">
+						<span class="major">0h</span>
+						<span class="minor"> &bull; </span>
+						<span class="major">6h</span>
+						<span class="minor"> &bull; </span>
+						<span class="major">12h</span>
+						<span class="minor"> &bull; </span>
+						<span class="major">18h</span>
+						<span class="minor"> &bull; </span>
+						<span class="major">24h</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="cal">
+				<h2 class="weekday">{{ the_date.weekday }}</h2>
+				<div class="date">
+					<p class="num">{{ the_date.day }}</p>
+					<p class="mmyy">{{ the_date.month }} <br /> {{ the_date.year }}</p>
+				</div>
+			</div>
+		</section>
+
+		<section id="weather">
+			<div class="current">
+				<h2>Current Weather</h2>
+				<div class="readout">
+					<figure class="icon">
+						<img src="icons/{{ current.day_night }}/{{ current.icon }}.png" alt="{{ current.text }}">
+					</figure>
+
+					<div class="metadata">
+						<p class="cond">{{ current.text }}</p>
+						<p class="temp">{{ current.temp }}&deg;F</p>
+						<p class="hilo">
+							{{ current.high }}&deg;F / {{ current.low }}&deg;F
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="hourcast">
+				<h2>Today's Forecast</h2>
+
+				<div class="hourgrid">
+
+				{% for time in forecast %}
+					<div class="hourly {{ time.daytime[0] }}">
+						<p class="hour">
+							{{ time.daytime[1] }}
+						</p>
+						<figure class="icon">
+							{% if loop.index == 4 %}
+								<img src="icons/night/{{ time.icon }}.png" alt="{{ time.text }}">
+							{% else %}
+								<img src="icons/day/{{ time.icon }}.png" alt="{{ time.text }}">
+							{% endif %}
+						</figure>
+						<p class="temp">
+							{{ time.temp }}&deg;F
+						</p>
+					</div>
+				{% endfor %}
+
+				</div>
+
+			</div>
+
+		</section>
+	</main>
+</body>
+
+</html>
