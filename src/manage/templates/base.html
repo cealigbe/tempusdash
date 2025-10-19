@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{% block title %}{% endblock %} - Tempus DB Manager</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" >
+</head>
+
+<body>
+  <main id="main">
+    <header id="header">
+      <h1>Tempus Dashboard Manager</h1>
+
+      <hr />
+    </header>
+
+    {% block content %}{% endblock %}
+
+    <footer id="footer">
+			<hr />
+			<p>Tempus DB version 1.5.0 - by Chuck Aligbe</p>
+		</footer>
+  </main>
+
+  {% block modals %}{% endblock %}
+
+  <dialog id="spinner">
+    <h2>Dashboard Updating. Please Wait...</h2>
+    <div class="loader"></div>
+  </dialog>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

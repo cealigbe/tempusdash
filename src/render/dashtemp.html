@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="style.css">
+	<title>Tempus Dash</title>
+</head>
+
+<body>
+	<main>
+		<section id="calclock">
+			<div class="dayloader">
+				<h2>Dayloader Clock</h2>
+				
+				<div class="graph">
+					<div class="track">
+						<div class="mask">
+							<div class="bar" style="width: 62.5%;">&nbsp;</div>
+						</div>
+					</div>
+
+					<div class="ticks">
+						<span class="major">0h</span>
+						<span class="minor"> &bull; </span>
+						<span class="major">6h</span>
+						<span class="minor"> &bull; </span>
+						<span class="major">12h</span>
+						<span class="minor"> &bull; </span>
+						<span class="major">18h</span>
+						<span class="minor"> &bull; </span>
+						<span class="major">24h</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="cal">
+				<h2 class="weekday">Saturday</h2>
+				<div class="date">
+					<p class="num">30</p>
+					<p class="mmyy">Nov <br /> 2025</p>
+				</div>
+			</div>
+		</section>
+
+		<section id="weather">
+			<div class="current">
+				<h2>Current Weather</h2>
+				<div class="readout">
+					<figure class="icon">
+						<img src="icons/night/296.png" alt="Light rain">
+					</figure>
+
+					<div class="metadata">
+						<p class="cond">Light rain</p>
+						<p class="temp">70&deg;F</p>
+						<p class="hilo">
+							73&deg;F / 63&deg;F
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="hourcast">
+				<h2>Today's Forecast</h2>
+
+				<div class="hourgrid">
+					<div class="hourly morn">
+						<p class="hour">Morning</p>
+						<figure class="icon">
+							<img src="icons/day/353.png" alt="Light rain shower">
+						</figure>
+						<p class="temp">
+							66&deg;F
+						</p>
+					</div>
+
+					<div class="hourly noon">
+						<p class="hour">Noon</p>
+						<figure class="icon">
+							<img src="icons/day/122.png" alt="Overcast ">
+						</figure>
+						<p class="temp">
+							68&deg;F
+						</p>
+					</div>
+
+					<div class="hourly even">
+						<p class="hour">Evening</p>
+						<figure class="icon">
+							<img src="icons/day/143.png" alt="Mist">
+						</figure>
+						<p class="temp">
+							72&deg;F
+						</p>
+					</div>
+
+					<div class="hourly night">
+						<p class="hour">Night</p>
+						<figure class="icon">
+							<img src="icons/night/248.png" alt="Fog">
+						</figure>
+						<p class="temp">
+							70&deg;F
+						</p>
+					</div>
+				</div>
+
+			</div>
+
+		</section>
+	</main>
+</body>
+
+</html>

@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+<title>
+  {% block title %}Home{% endblock %}
+</title>
+
+{% block content %}
+	<section id="dash-status" class="container">
+    <h3>Currently Active Plugin</h3>
+    <p class="status">
+      {{ status.name }}, last run: {{ status.last_run }}
+    </p>
+	</section>
+
+	<section id="tilegrid" class="container">
+		{% for button in buttons %}
+		  {% if button.id == "photo" %}
+				<a href="{{button.route}}" class="button tile">
+		      <img src="{{ url_for('static', filename='img/' + button.icon) }}" alt="{{ button.id }}">
+  				<span>
+  					{{ button.text }}
+  				</span>
+				</a>
+			{% else %}
+  			<button class="tile" id="{{ button.id }}" data-route="{{ button.route }}">
+  				<img src="{{ url_for('static', filename='img/' + button.icon) }}" alt="{{ button.id }}">
+  				<span>
+  					{{ button.text }}
+  				</span>
+  			</button>
+      {% endif %}
+		{% endfor %}
+	</section>
+{% endblock %}
+
+{% block modals %}
+	<dialog id="settings">
+		<h2>Dashboard Settings</h2>
+
+		<form method="dialog">
+			<label for="timer">Dashboard Refresh Time (mins)</label>
+			<input type="number" name="timer" id="timer" value="10" min="5" max="60" />
+
+			<div class="action-area">
+				<button class="close danger" value="close">Close</button>
+				<button id="save" value="save">Submit</button>
+			</div>
+		</form>
+	</dialog>
+
+	<dialog id="photolink">
+		<h2>Display Image from URL</h2>
+
+		<form method="dialog">
+			<label for="url">Photo URL</label>
+			<input type="url" name="url" id="url" placeholder="Enter a valid URL" pattern="https?://.*" />
+
+			<div class="action-area">
+				<button class="close danger" value="close">Close</button>
+				<button id="save" value="save">Submit</button>
+			</div>
+		</form>
+	</dialog>
+{% endblock %}

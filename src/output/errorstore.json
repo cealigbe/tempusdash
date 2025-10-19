@@ -1,0 +1,67 @@
+{
+    "timestamp": 978325200.0,
+    "weather":
+    {
+        "location": "Atlanta",
+        "region": "Georgia",
+        "text": "Error",
+        "code": 9999,
+        "icon": "error",
+        "is_day": 1,
+        "day_night": "day",
+        "temp": "--",
+        "high": "--",
+        "low": "--"
+    },
+    "forecast":
+    [
+        {
+            "hour": 8,
+            "daytime":
+            [
+                "morn",
+                "Morning"
+            ],
+            "text": "Error",
+            "code": 9999,
+            "temp": "--",
+            "icon": "error"
+        },
+        {
+            "hour": 13,
+            "daytime":
+            [
+                "noon",
+                "Noon"
+            ],
+            "text": "Error",
+            "code": 9999,
+            "temp": "--",
+            "icon": "error"
+        },
+        {
+            "hour": 18,
+            "daytime":
+            [
+                "even",
+                "Evening"
+            ],
+            "text": "Error",
+            "code": 9999,
+            "temp": "--",
+            "icon": "error"
+        },
+        {
+            "hour": 23,
+            "daytime":
+            [
+                "night",
+                "Night"
+            ],
+            "text": "Error",
+            "code": 9999,
+            "temp": "--",
+            "icon": "error"
+        }
+    ]
+}
