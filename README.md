@@ -133,6 +133,7 @@ Tempus Dash was inspired by these e-ink dashboard projects:
 - [MagInkDash](https://github.com/speedyg0nz/MagInkDash): an e-ink dashboard that displays weather, calendar, and world facts.
 - [E-Ink Weather and News](https://sambroner.com/posts/raspberry-pi-weather): an e-ink weather and news dashboard by Sam Broner
 - [E-Ink Weather Display](https://github.com/kimmobrunfeldt/eink-weather-display): a battery-powered e-ink weather display
+- [Dayloader Clock](https://www.instagram.com/reel/DJMb8FkuTcL/): a progress-bar style clock by Unnecessary Inventions that tells you the current day's progress
 
 
 
