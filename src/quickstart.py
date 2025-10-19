@@ -11,7 +11,7 @@ from config import config
 TEMPUS_FOLDER = config["TEMPUS_FOLDER"]
 
 def set_portal_job():
-    command = "sleep 60 && cd ~/tempus-db/manage/ && python app.py"
+    command = f"sleep 60 && cd {TEMPUS_FOLDER}/manage/ && python app.py"
 
     cron = CronTab(user=True)
     cron.remove_all(command=command)
@@ -23,7 +23,7 @@ def set_portal_job():
     return len(cron) > 0
 
 def clear_portal_job():
-  command = "sleep 60 && cd ~/tempus-db/manage/ && python app.py"
+  command = f"sleep 60 && cd {TEMPUS_FOLDER}/manage/ && python app.py"
 
   cron = CronTab(user=True)
   portal_jobs = cron.find_command(command)
