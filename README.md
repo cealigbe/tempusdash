@@ -1,12 +1,12 @@
 # Tempus DB
 
-An open-source, Raspberry-Pi powered e-ink display, with multiple apps for the display and a web UI to manage them. The software, written in Python is designed for the Waveshare 7.5-inch e-ink display and the web UI is powered by Flask. 
+An open-source, Raspberry Pi-powered e-ink display, with multiple apps for the display and a web UI to manage them. The software, written in Python, is designed for the Waveshare 7.5-inch e-ink display, and the web UI is powered by Flask. 
 
 ![Tempus Dashboard](docs/img/tempus-dash-v2.jpeg)
 
 ## About Tempus DB
 
-Tempus DB is a internet connected e-ink display, powered by a Raspberry Pi. The software is written in Python 3 (somewhat hackily) and the web UI is powered by Flask and written with HTML, CSS, JS. The interface allows the user to control Tempus app from any device on their local network. Setting up the software will require some initial Terminal commands, but once installed, the software is easy to manage.
+Tempus DB is an internet-connected e-ink display, powered by a Raspberry Pi. The software is written in Python 3 (somewhat hackily), and the web UI is powered by Flask and written with HTML, CSS, and JS. The interface allows the user to control the Tempus Dash from any device on their local network. Setting up the software will require some initial Terminal commands, but once installed, the software is easy to manage.
 
 **Tempus Dash Apps:**
 
@@ -18,19 +18,19 @@ Expect more apps soon. And feel free to adapt the code yourself and add more app
 
 ## Tempus Hardware
 
-My Tempus uses an old Raspberry Pi 3b+ that I had from another project, and that is more than sufficient enough for running the apps and web UI server. For Tempus DB you will need:
+My Tempus uses an old Raspberry Pi 3b+ that I had from another project, and that is more than sufficient for running the apps and web UI server. For Tempus DB, you will need:
 
 - A Raspberry Pi 4 / 3 / Zero 2 WH
 - MicroUSB power adapter, 5V
 - MicroSD card
 - [Waveshare 7.5 in e-ink display w/ HAT](https://www.waveshare.com/7.5inch-e-paper-hat.htm)
 - Picture frame or 3D printed frame
-	- there are lots of options for the frame to purchase or print if you have a 3D printer
-	- I designed and printed my own frame: [Minimalist Waveshare E-ink Display Frame](https://printables.com)
+	- There are lots of options for the frame to purchase or print if you have a 3D printer
+	- I designed and printed my own frame: [Minimalist Waveshare E-ink Display Frame]([https://printables.com](https://www.printables.com/model/1450561-minimal-waveshare-75-in-e-paper-display-frame))
 
 ## Installation
 
-After setting up your Raspberry Pi, installing the Waveshare utilities for the e-ink display, connecting the display to the Pi, and testing the display for functionality, (please see the respective instructional guides for Raspberry Pi setup and Waveshare display setup) you are ready to set up the Tempus software.
+After setting up your Raspberry Pi, installing the Waveshare utilities for the e-ink display, connecting the display to the Pi, and testing the display for functionality (please see the respective instructional guides for Raspberry Pi setup and Waveshare display setup), you are ready to set up the Tempus software.
 
 1. Clone the repo 
 
@@ -60,7 +60,7 @@ After setting up your Raspberry Pi, installing the Waveshare utilities for the e
 	}
 	```
 
-5. Run the quickstart.py script to initialize the time-weather dashboard. This will set up a cronjob to update the display every 10 minutes.
+5. Run the quickstart.py script to initialize the time-weather dashboard. This will set up a cron job to update the display every 10 minutes.
 
 	```bash
 	python3 quickstart.py
