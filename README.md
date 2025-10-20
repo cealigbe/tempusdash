@@ -97,7 +97,7 @@ After setting up your Raspberry Pi, installing the Waveshare utilities for the e
 	sudo systemctl status tempusapp.service
 	```
 	
-10. To access the web UI, visit [your Pi's IP address]:5555 on a browser on another device. For example, if your Pi's IP address is 10.0.0.10, or is called "tempuspi" visit, ```http://10.0.0.10:5555``` or ```http://tempuspi.local:5555```.
+10. To access the web UI, visit [your Pi's IP address]:5555 on a browser on another device. For example, if your Pi's IP address is 10.0.0.10, or is called "raspberrypi" visit, ```http://10.0.0.10:5555``` or ```http://raspberrypi.local:5555```.
 
 	![Tempus Manager](docs/img/tempus-manager.png)
 
