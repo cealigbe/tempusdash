@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
+	<title>Tempus Year Progress</title>
+</head>
+
+<body>
+  <main>
+    <header class="progress-header">
+      <h2>
+        {{ progress.year }}
+      </h2>
+      <p class="subtitle">Progress</p>
+      <p class="date">as of {{ progress.the_date }}</p>
+    </header>
+
+    <section id="progress">
+      <div class="graph">
+        <div class="bar" style="width: {{ progress.pct | round(4) }}%">
+          &nbsp;
+        </div>
+        <div class="gridlines">
+          {% for i in range(13) %}
+						{% if i >= (progress.pct * 12/100 - 0.0002)|round(0, "ceil") %}
+							<div class="line hidden"></div>
+						{% else %}
+							<div class="line"></div>
+						{% endif %}
+					{% endfor %}
+        </div>
+      </div>
+
+      <div class="labels">
+        <span>
+          <strong>{{ progress.pct | round(0) }}</strong>% done
+        </span>
+        <span>
+          <strong>{{ progress.current_day }}</strong> / {{ progress.total_days }} days
+        </span>
+      </div>
+    </section>
+  </main>
+</body>
+
+</html>

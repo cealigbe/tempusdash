@@ -65,6 +65,23 @@ class ClockModule(object):
 
 		return fulldate
 
+	def get_ytd(self):
+		today = datetime.date.today()
+		start_day = datetime.date(today.year, 1, 1)
+		end_day = datetime.date(today.year, 12, 31)
+		total_days = (end_day - start_day).days + 1
+		doyr = (today - start_day).days + 1
+		progress_pct = (doyr / total_days) * 100
+
+		year_to_date = {
+				"year": today.year,
+				"total_days": total_days,
+				"current_day": doyr,
+				"pct": progress_pct
+		}
+
+		return year_to_date
+
 	def get_time(self):
 		now = datetime.datetime.now()
 		time = now.time()
@@ -99,13 +116,3 @@ class ClockModule(object):
 		percent = current_minutes/1440 * 100
 
 		return round(percent, 3)
-
-
-
-
-
-"""
-clockmod = ClockModule()
-print(clockmod.get_raw_date())
-print(clockmod.get_time_pct())
-"""

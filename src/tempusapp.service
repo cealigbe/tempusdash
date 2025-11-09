@@ -4,9 +4,9 @@ After=multi-user.target
 
 [Service]
 Type=simple
-ExecStart=[/path/to]/tempusdash/src/manage/app.py
+ExecStart=/home/tempus/tempus-db/manage/app.py
 User=tempus
-WorkingDirectory=[/path/to]/tempusdash/src/manage
+WorkingDirectory=/home/tempus/tempus-db/manage
 Restart=on-failure
 
 [Install]

@@ -2,8 +2,14 @@ from crontab import CronTab
 import subprocess
 import sys
 
+sys.path.append("../")
+
+from config import config
+
+TEMPUS_FOLDER = config["TEMPUS_FOLDER"]
+
 def set_tempus_job(timer=10):
-    command = "cd ~/tempus-db/ && python main.py"
+    command = f"cd {TEMPUS_FOLDER} && python3 main.py"
 
     cron = CronTab(user=True)
     cron.remove_all(command=command)
@@ -13,6 +19,18 @@ def set_tempus_job(timer=10):
     cron.write()
 
     return len(cron) > 0
+
+def set_progress_job(hour=8):
+  command = f"cd {TEMPUS_FOLDER} && python3 yearprogress.py"
+
+  cron = CronTab(user=True)
+  cron.remove_all(command=command)
+
+  job = cron.new(command=command, comment="tempus")
+  job.setall(f"4 {hour} * * *")
+  cron.write()
+
+  return len(cron) > 0
 
 def clear_jobs():
     cron = CronTab(user=True)
@@ -67,7 +85,7 @@ def clear_display():
     try:
         result = subprocess.run([
             'python3', 'gpio_wrapper.py', 'clear'
-        ], cwd='/home/tempus/tempus-db', capture_output=True, text=True, timeout=30)
+        ], cwd=TEMPUS_FOLDER, capture_output=True, text=True, timeout=30)
 
         return result.returncode == 0
     except Exception:

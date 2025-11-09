@@ -2,8 +2,8 @@
     "timestamp": 978325200.0,
     "weather":
     {
-        "location": "Atlanta",
-        "region": "Georgia",
+        "location": "London",
+        "region": "United Kingdom",
         "text": "Error",
         "code": 9999,
         "icon": "error",

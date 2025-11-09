@@ -90,7 +90,8 @@ def index():
 		button_list = [
 				{"id": "dashboard", "text": "Start Dashboard", "icon": "layout-dashboard.svg", "route":""},
 				{"id": "photo", "text": "Display Image", "icon": "image.svg", "route":"/image-display"},
-				{"id": "url-photo", "text": "Display Image from URL", "icon": "square-arrow-up-right.svg", "route":""},
+				{"id": "photolink", "text": "Display Image from URL", "icon": "square-arrow-up-right.svg", "route":""},
+				{"id":"yearprogress", "text": "Year Progress", "icon": "calendar-1.svg", "route": "/progress-display"},
 				{"id": "clear", "text": "Clear Dashboard", "icon": "brush-cleaning.svg", "route":"/clear"},
 				{"id": "pause", "text": "Pause Dashboard", "icon": "circle-pause.svg", "route":"/dashstop"}
 		]
@@ -114,29 +115,34 @@ def manage_screen(operation, fp=None):
 		# Run the actual operation
 		if operation == 'dashboard':
 			result = subprocess.run(['python3', 'main.py'],
-														cwd=TEMPUS_FOLDER,
-														capture_output=True, text=True, timeout=60)
+									cwd=TEMPUS_FOLDER,
+									capture_output=True, text=True, timeout=60)
 		elif operation == 'photo':
 			result = subprocess.run(['python3', 'photodisplay.py'],
-														cwd=TEMPUS_FOLDER,
-														capture_output=True, text=True, timeout=30)
+									cwd=TEMPUS_FOLDER,
+									capture_output=True, text=True, timeout=30)
 		elif operation == 'clear':
 			result = subprocess.run(['python3', 'clear.py'],
-														cwd=TEMPUS_FOLDER,
-														capture_output=True, text=True, timeout=30)
+									cwd=TEMPUS_FOLDER,
+									capture_output=True, text=True, timeout=30)
 		elif operation == 'imagedisplay':
 			the_cmd = f'import utils; utils.send_to_display("{fp}")'
 			# print(photo_cmd)
 			result = subprocess.run(['python3', '-c', the_cmd],
-														cwd=TEMPUS_FOLDER,
-														capture_output=True, text=True, timeout=30)
+									cwd=TEMPUS_FOLDER,
+									capture_output=True, text=True, timeout=30)
 
 		elif operation == 'imageurl':
 			the_cmd = f'import utils; utils.imageurl_to_display("{fp}")'
 			# print(photo_cmd)
 			result = subprocess.run(['python3', '-c', the_cmd],
-														cwd=TEMPUS_FOLDER,
-														capture_output=True, text=True, timeout=30)
+									cwd=TEMPUS_FOLDER,
+									capture_output=True, text=True, timeout=30)
+
+		elif operation == 'yearprogress':
+			result = subprocess.run(['python3', 'yearprogress.py'],
+									cwd=TEMPUS_FOLDER,
+									capture_output=True, text=True, timeout=60)
 
 		return result.returncode == 0, result.stdout, result.stderr
 	except subprocess.TimeoutExpired:
@@ -150,7 +156,7 @@ def manage_screen(operation, fp=None):
 def dashstart():
 		if request.method == 'POST':
 				data = request.form
-				timer = data["timing"]
+				timer = data["input_data"]
 
 				print(timer)
 
@@ -169,7 +175,7 @@ def dashstart():
 						errormsg = 'Dashboard not started'
 						return handle_logger(errormsg, False, 400)
 		else:
-				errormsg = 'Request must be JSON'
+				errormsg = 'Invalid request from manager'
 				return handle_logger(errormsg, False, 400)
 
 # serve images from upload folder
@@ -241,7 +247,7 @@ def showimageurl():
 		return handle_logger(errormsg, False, 400)
 
 	try:
-		url = request.form.get('image_url')
+		url = request.form.get('input_data')
 		if not url:
 			errormsg = 'URL photo display failed'
 			return handle_logger(errormsg, False, 400)
@@ -282,6 +288,52 @@ def showimage():
 		else:
 			errormsg = 'Photo display failed'
 			return handle_logger(errormsg, False, 400)
+
+# year progress manager page route
+@app.route("/progressdisplay")
+@app.route("/progress-display")
+def progress_display():
+	return render_template("display-progress.html")
+
+# year progress display route
+@app.route('/yearprogress', methods=['POST'])
+def showprogress():
+	if request.method == 'POST':
+		data = request.form
+		action = data["action"]
+
+		hasjob = False
+		hour = -1
+
+		if action == "flash":
+			hasjob = True
+		elif action == "update":
+			hour = int(data["hour"])
+			hasjob = set_progress_job(hour)
+
+		if hasjob:
+			success, stdout, stderr = manage_screen('yearprogress')
+
+			if success:
+				if hour > 0:
+					result = f"Year progress displayed. Progress will display every day at {hour} o'clock."
+				else:
+					result = "Year progress displayed"
+				flash(result, "success")
+				return redirect(url_for("progress_display"))
+
+			else:
+				errormsg = f'Year progress not displayed: {stderr}'
+				flash(errormsg, "error")
+				return redirect(url_for("progress_display"))
+		else:
+			errormsg = "Year Progress not displayed"
+			flash(errormsg, "error")
+			return redirect(url_for("progress_display"))
+	else:
+		errormsg = 'Invalid request from manager'
+		flash(errormsg, "error")
+		return redirect(url_for("progress_display"))
 
 # clear screen route
 @app.route('/clear', methods=['POST'])

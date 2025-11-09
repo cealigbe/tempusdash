@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+<title>
+  {% block title %}Display Year Progress{% endblock %}
+</title>
+
+{% block content %}
+  <section id="progress-display" class="container">
+    <header class="section-header">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <ul class="flashes">
+          {% for cat, msg in messages %}
+            <li class="{{ cat }}">
+              {% if cat == "error" %}Error: {%endif%} {{ msg }}
+            </li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      {% endwith %}
+
+      <p>
+        <a href="{{ url_for('index') }}" class="back-link">
+          &lt; Back to Home
+        </a>
+      </p>
+      <br />
+      <h2>
+        Display Year Progress
+      </h2>
+      <p>Display the progress for the year or update utility's display schedule.</p>
+    </header>
+
+    <form action="/yearprogress" method="post">
+      <label for="hour">Update every day at: </label>
+      <div class="input-suffix">
+        <input type="text" pattern="[0-9]*" inputmode="numeric"  name="hour" id="hour" value="8" min="0" max="23" />
+        <span class="suffix">o' clock</span>
+      </div>
+
+      <div class="action-area">
+				<button class="secondary" name="action" value="flash">Flash Progress</button>
+				<button name="action" value="update">Update Schedule</button>
+			</div>
+    </form>
+
+  </section>
+{% endblock %}
