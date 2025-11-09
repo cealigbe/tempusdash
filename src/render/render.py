@@ -10,8 +10,6 @@ from datetime import timedelta
 from jinja2 import Environment, FileSystemLoader
 
 import pathlib
-import string
-from PIL import Image
 import logging
 from selenium.webdriver.common.by import By
 
@@ -116,3 +114,37 @@ class WordclockRenderer(RenderHelper):
 			htmlFile.write(rendered)
 
 		self.get_screenshot(server_image_path)
+
+
+
+class ProgressRenderer(RenderHelper):
+	def __init__(self, width, height, angle=0):
+		super().__init__(width, height, angle)
+
+		self.outputImg = "yearprogress.png"
+		self.outputHtml = "yearprogress.html"
+		self.templateFile = "yearprogress-template.jinja"
+
+		self.htmlFile = 'file://' + self.currPath + '/' + self.outputHtml
+
+	def proceess_progress(self, year, the_date, pct, current_day, total_days, server_image_path):
+
+			#read html template
+			env = Environment(loader=FileSystemLoader(self.currPath))
+			template = env.get_template(self.templateFile)
+
+			context = {
+				'year': year,
+				'the_date': the_date,
+				'pct': pct,
+				'current_day': current_day,
+				'total_days': total_days
+			}
+
+			# render template and write to file
+			rendered = template.render(progress=context)
+
+			with open(self.currPath + '/' + self.outputHtml, 'w') as htmlFile:
+				htmlFile.write(rendered)
+
+			self.get_screenshot(server_image_path)

@@ -14,7 +14,7 @@
 
 	<section id="tilegrid" class="container">
 		{% for button in buttons %}
-		  {% if button.id == "photo" %}
+		  {% if button.id in ["photo", "yearprogress"] %}
 				<a href="{{button.route}}" class="button tile">
 		      <img src="{{ url_for('static', filename='img/' + button.icon) }}" alt="{{ button.id }}">
   				<span>
@@ -34,12 +34,12 @@
 {% endblock %}
 
 {% block modals %}
-	<dialog id="settings">
-		<h2>Dashboard Settings</h2>
+	<dialog id="dash-settings" class="controller">
+		<h2>Time Weather Dashboard</h2>
 
 		<form method="dialog">
 			<label for="timer">Dashboard Refresh Time (mins)</label>
-			<input type="number" name="timer" id="timer" value="10" min="5" max="60" />
+			<input type="text" pattern="[0-9]*" inputmode="numeric" name="timer" id="timer" value="10" min="5" max="60" />
 
 			<div class="action-area">
 				<button class="close danger" value="close">Close</button>
@@ -48,7 +48,7 @@
 		</form>
 	</dialog>
 
-	<dialog id="photolink">
+	<dialog id="photo-link" class="controller">
 		<h2>Display Image from URL</h2>
 
 		<form method="dialog">
@@ -61,4 +61,23 @@
 			</div>
 		</form>
 	</dialog>
+
+	<!--
+	<dialog id="progressor" class="controller">
+    <h2>Year Progress</h2>
+
+    <form method="dialog">
+      <label for="hour">Update every day at: </label>
+      <div class="input-suffix">
+        <input type="text" pattern="[0-9]*" inputmode="numeric"  name="hour" id="hour" value="8" min="0" max="23" />
+        <span class="suffix">o' clock</span>
+      </div>
+
+      <div class="action-area">
+				<button class="close danger" value="close">Close</button>
+				<button id="save" value="save">Submit</button>
+			</div>
+    </form>
+	</dialog>
+	-->
 {% endblock %}

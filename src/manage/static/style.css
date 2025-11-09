@@ -100,7 +100,7 @@ h1 {
 }
 
 a {
-  font-weight: 600;
+  font-weight: 700;
   text-decoration: none;
   color: hsl(210, 100%, 50%);
   transition: color 0.25s;
@@ -129,6 +129,18 @@ hr {
   transition: all 0.25s ease;
 }
 
+:is(button, input[type="submit"], a.button).secondary {
+  border: none;
+  color: hsl(210, 100%, 50%);
+  font-weight: 700;
+  background-color: #fff;
+}
+
+:is(button, input[type="submit"], a.button).danger {
+  color: #c33;
+  border-color: #c33;
+}
+
 :is(button, input[type="submit"], a.button):hover,
 :is(button, input[type="submit"], a.button):focus {
   background-color: #ccc;
@@ -136,11 +148,6 @@ hr {
 
 :is(button, input[type="submit"], a.button):active {
   background-color: #aaa;
-}
-
-:is(button, input[type="submit"], a.button).danger {
-  color: #c33;
-  border-color: #c33;
 }
 
 input:not([type="submit"], [type="radio"], [type="checkbox"], [type="file"]) {
@@ -159,6 +166,7 @@ section.container {
   width: 100%;
   max-width: 50rem;
   margin: 0 auto 2rem;
+  flex-grow: 1;
 }
 
 .section-header {
@@ -286,6 +294,39 @@ input[type="file"]::-webkit-file-upload-button:active {
   background-color: #aaa;
 }
 
+#progress-display form {
+  max-width: 25rem;
+
+  & > div {
+    width: 100%;
+    display: flex;
+    gap: 0.5rem;
+    padding-bottom: 1rem;
+  }
+
+  & .input-suffix {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+
+    & > input {
+      width: auto;
+      flex-grow: 1;
+    }
+
+    & > span.suffix {
+      padding-inline: 0.5rem;
+      text-align: left;
+    }
+  }
+
+  & .action-area {
+    & button {
+      flex-grow: 1;
+    }
+  }
+}
+
 main > footer {
   font-size: 0.875rem;
   font-weight: 500;
@@ -314,6 +355,22 @@ dialog {
 
   input {
     width: 100%;
+  }
+
+  .input-suffix {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+
+    & > input {
+      width: auto;
+      flex-grow: 1;
+    }
+
+    & > span.suffix {
+      padding-inline: 0.5rem;
+      text-align: left;
+    }
   }
 }
 

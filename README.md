@@ -1,36 +1,37 @@
 # Tempus DB
 
-An open-source, Raspberry Pi-powered e-ink display, with multiple apps for the display and a web UI to manage them. The software, written in Python, is designed for the Waveshare 7.5-inch e-ink display, and the web UI is powered by Flask. 
+An open-source, Raspberry-Pi powered e-ink display, with multiple apps for the display and a web UI to manage them. The software, written in Python is designed for the Waveshare 7.5-inch e-ink display and the web UI is powered by Flask. 
 
 ![Tempus Dashboard](docs/img/tempus-dash-v2.jpeg)
 
 ## About Tempus DB
 
-Tempus DB is an internet-connected e-ink display, powered by a Raspberry Pi. The software is written in Python 3 (somewhat hackily), and the web UI is powered by Flask and written with HTML, CSS, and JS. The interface allows the user to control the Tempus Dash from any device on their local network. Setting up the software will require some initial Terminal commands, but once installed, the software is easy to manage.
+Tempus DB is a internet connected e-ink display, powered by a Raspberry Pi. The software is written in Python 3 (somewhat hackily) and the web UI is powered by Flask and written with HTML, CSS, JS. The interface allows the user to control Tempus app from any device on their local network. Setting up the software will require some initial Terminal commands, but once installed, the software is easy to manage.
 
 **Tempus Dash Apps:**
 
 - Time-Weather Dashboard: displays the time as a 24-hr clock as well as the current weather and daily forecast at a regular interval.
 - Photo Display: display a photo uploaded to the Raspberry Pi via the web UI
 - Photo Display from URL: display a photo from a URL input in the web app.
+- Year Progress: display a progress bar indicating how much of the current year has passed.
 
 Expect more apps soon. And feel free to adapt the code yourself and add more apps.
 
 ## Tempus Hardware
 
-My Tempus uses an old Raspberry Pi 3b+ that I had from another project, and that is more than sufficient for running the apps and web UI server. For Tempus DB, you will need:
+My Tempus uses an old Raspberry Pi 3b+ that I had from another project, and that is more than sufficient enough for running the apps and web UI server. For Tempus DB you will need:
 
 - A Raspberry Pi 4 / 3 / Zero 2 WH
 - MicroUSB power adapter, 5V
 - MicroSD card
 - [Waveshare 7.5 in e-ink display w/ HAT](https://www.waveshare.com/7.5inch-e-paper-hat.htm)
 - Picture frame or 3D printed frame
-	- There are lots of options for the frame to purchase or print if you have a 3D printer
-	- I designed and printed my own frame: [Minimalist Waveshare E-ink Display Frame]([https://printables.com](https://www.printables.com/model/1450561-minimal-waveshare-75-in-e-paper-display-frame))
+	- there are lots of options for the frame to purchase or print if you have a 3D printer
+	- I designed and printed my own frame: [Minimalist Waveshare E-ink Display Frame](https://printables.com)
 
 ## Installation
 
-After setting up your Raspberry Pi, installing the Waveshare utilities for the e-ink display, connecting the display to the Pi, and testing the display for functionality (please see the respective instructional guides for Raspberry Pi setup and Waveshare display setup), you are ready to set up the Tempus software.
+After setting up your Raspberry Pi, installing the Waveshare utilities for the e-ink display, connecting the display to the Pi, and testing the display for functionality, (please see the respective instructional guides for Raspberry Pi setup and Waveshare display setup) you are ready to set up the Tempus software.
 
 1. Clone the repo 
 
@@ -50,7 +51,7 @@ After setting up your Raspberry Pi, installing the Waveshare utilities for the e
 	pip3 install -r requirements.txt
 	```
 
-4. To initialize the weather display, grab a free WeatherAPI key from [weatherapi.com](http://weatherapi.com), then add your new key to the config.py file in the src folder. The weather script won't run otherwise
+4. To initialize the weather display, grab a free WeatherAPI key from [weatherapi.com](http://weatherapi.com), then add your location and new key to the config.py.temp file in the src folder. Then rename the config.py.temp file to "config.py". The weather script won't run otherwise.
 
 	```python
 	config = {
@@ -60,7 +61,7 @@ After setting up your Raspberry Pi, installing the Waveshare utilities for the e
 	}
 	```
 
-5. Run the quickstart.py script to initialize the time-weather dashboard. This will set up a cron job to update the display every 10 minutes.
+5. Run the quickstart.py script to initialize the time-weather dashboard. This will set up a cronjob to update the display every 10 minutes.
 
 	```bash
 	python3 quickstart.py
@@ -97,7 +98,7 @@ After setting up your Raspberry Pi, installing the Waveshare utilities for the e
 	sudo systemctl status tempusapp.service
 	```
 	
-10. To access the web UI, visit [your Pi's IP address]:5555 on a browser on another device. For example, if your Pi's IP address is 10.0.0.10, or is called "raspberrypi" visit, ```http://10.0.0.10:5555``` or ```http://raspberrypi.local:5555```.
+10. To access the web UI, visit [your Pi's IP address]:5555 on a browser on another device. For example, if your Pi's IP address is 10.0.0.10, or is called "tempuspi" visit, ```http://10.0.0.10:5555``` or ```http://tempuspi.local:5555```.
 
 	![Tempus Manager](docs/img/tempus-manager.png)
 
@@ -133,7 +134,6 @@ Tempus Dash was inspired by these e-ink dashboard projects:
 - [MagInkDash](https://github.com/speedyg0nz/MagInkDash): an e-ink dashboard that displays weather, calendar, and world facts.
 - [E-Ink Weather and News](https://sambroner.com/posts/raspberry-pi-weather): an e-ink weather and news dashboard by Sam Broner
 - [E-Ink Weather Display](https://github.com/kimmobrunfeldt/eink-weather-display): a battery-powered e-ink weather display
-- [Dayloader Clock](https://www.instagram.com/reel/DJMb8FkuTcL/): a progress-bar style clock by Unnecessary Inventions that tells you the current day's progress
 
 
 
