@@ -62,7 +62,7 @@ if __name__ == '__main__':
 
 	if is_displayed:
 		time.sleep(0.5)
-		logger.info("Completed clock update")
+		logger.info("Completed year progress update")
 
 	manage_out = {
 			"timestamp": now.timestamp(),
