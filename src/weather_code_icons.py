@@ -6,6 +6,7 @@ weather_code_icons = {
     1006: 119,  # Cloudy
     1009: 122,  # Overcast
     1030: 143,  # Mist
+    1036: 143,  # Smoky haze
     1063: 176,  # Patchy rain possible
     1066: 179,  # Patchy snow possible
     1069: 182,  # Patchy sleet possible
