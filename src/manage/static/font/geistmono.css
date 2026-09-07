@@ -1,9 +1,0 @@
-@font-face {
-  font-family: 'Geist Mono';
-  src: url('GeistMonoVF.woff2') format('woff2'),
-       url('GeistMonoVF.woff') format('woff'),
-       url('GeistMonoVF.ttf') format('truetype');
-       font-weight: 300 900;
-       font-display: swap;
-       font-style: normal;
-}
