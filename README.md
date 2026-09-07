@@ -12,7 +12,9 @@ Tempus Dash is an internet connected e-ink display, powered by a Raspberry Pi. T
 
 ## Say Hello to Tempus v2
 
-The Tempus Dash software has just received a major update. The code has been rewritten from scratch, with new dashboard apps, more efficient image rendering, a cleaner backend. The Cron-based utilities now use multiple fast refreshes between full refreshes to update the display. The web app also has new features including a clearer readout of the current app and chart logging the app history.
+**The Tempus Dash software has just received a major update**. 
+
+The code has been rewritten from scratch, with new dashboard apps, more efficient image rendering, a cleaner backend. The Cron-based utilities now use multiple fast refreshes between full refreshes to update the display. The web app also has new features including a clearer readout of the current app and chart logging the app history.
 
 **Tempus Dash Apps:**
 
