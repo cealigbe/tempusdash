@@ -1,0 +1,26 @@
+# --- TEMPUS DASH CONFIGURATION --- #
+#
+# WeatherAPI location and API key
+location = "[your city]"
+apikey = "[your api key]"
+
+# Image dimensions and rotation angle
+img_width = 800         # or your display width
+img_height = 480        # or your display height
+rotate_angle = 0
+
+# Render and data store paths
+dashboard_image_path = "render/tempusdash.png"
+wordclock_image_path = "render/wordclock.png"
+progress_image_path = "render/yearprogress.png"
+qrcode_image_path = "render/qrcode.png"
+message_image_path = "render/textdisplay.png"
+
+data_store = "output/datastore.json"
+history_file = "output/history.csv"
+
+# Photo display paths
+photo_path = "uploads/photo.png"
+error_photo = "uploads/error.png"
+
+photo_folder = "/uploads/"
