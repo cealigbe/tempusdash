@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Tempus QR Code Display</title>
+
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <section id="code-content">
+            <div class="qrcode">
+                <img src="{{ qrcode_url }}">
+            </div>
+
+            <div class="content">
+                <h1>{{ title }}</h1>
+                {% if showdata %}
+                <h2>{{ data }}</h2>
+                {% endif %}
+                {% if description %}
+                <hr>
+                <p class="description">
+                    {{ description }}
+                </p>
+                {% endif %}
+            </div>
+        </section>
+    </main>
+</body>
+</html>

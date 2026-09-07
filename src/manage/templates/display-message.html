@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+<title>
+  {% block title %}Display Message{% endblock %}
+</title>
+
+{% block content %}
+  <section id="message-display" class="container">
+    <header class="section-header">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <ul class="flashes">
+          {% for cat, msg in messages %}
+            <li class="{{ cat }}">
+              {% if cat == "error" %}Error: {%endif%} {{ msg }}
+            </li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      {% endwith %}
+
+      <p>
+        <a href="{{ url_for('index') }}" class="back-link">
+          &lt; Back to Home
+        </a>
+      </p>
+      <br />
+      <h2>
+        Display Message
+      </h2>
+      <p>Display a message on the screen from the provided text.</p>
+    </header>
+
+    <form action="/messenger" method="post">
+        <label for="message">
+            Message:
+        </label>
+        <textarea name="message" id="message" required></textarea>
+
+        <p>
+            Font size:
+        </p>
+        <div class="seg-control" id="fontsize">
+            <label for="small" class="seg-btn">
+                <input type="radio" id="small" name="fontsize" value="0.75">
+                <span>Small</span>
+            </label>
+            <label for="medium" class="seg-btn">
+                <input type="radio" id="medium" name="fontsize" value="1" checked>
+                <span>Medium</span>
+            </label>
+            <label for="large" class="seg-btn">
+                <input type="radio" id="large" name="fontsize" value="1.5">
+                <span>Large</span>
+            </label>
+            <label for="xlarge" class="seg-btn">
+                <input type="radio" id="xlarge" name="fontsize" value="2">
+                <span>XLarge</span>
+            </label>
+        </div>
+
+        <input type="hidden" name="md-text" id="md-text" value="">
+
+        <button type="submit">Display Message</button>
+
+    </form>
+    <br />
+    <div class="preview">
+        <p>
+            Preview:
+        </p>
+        <div class="screen">
+            <div class="contents">
+                &nbsp;
+            </div>
+        </div>
+    </div>
+
+  </section>
+{% endblock %}
+
+{% block scripts %}
+  <script src="{{ url_for('static', filename='showdown.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='purify.min.js') }}"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const preview = document.querySelector('.preview');
+      const screen = preview.querySelector('.screen');
+      const contents = preview.querySelector('.contents');
+      const message = document.querySelector('#message');
+      const sizeControl = document.querySelector('#fontsize');
+
+      var converter = new showdown.Converter();
+
+      updateFontSize();
+
+      message.addEventListener('input', function() {
+        mdtext = DOMPurify.sanitize(converter.makeHtml(message.value));
+        contents.innerHTML = mdtext;
+        document.querySelector('#md-text').value = mdtext;
+      });
+
+      sizeControl.addEventListener('change', updateFontSize);
+
+      window.addEventListener('resize', updateFontSize);
+
+      function updateFontSize() {
+        const fontSize = document.querySelector('input[name="fontsize"]:checked').value;
+        const screenHeight = screen.clientHeight + 4;
+        let factor = screenHeight / 30;
+        let scaledFontSize = fontSize * factor;
+        screen.style.padding = 2 * factor + 'px';
+        contents.style.fontSize = scaledFontSize + 'px';
+      }
+    });
+  </script>
+{% endblock %}
