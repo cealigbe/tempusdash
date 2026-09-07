@@ -220,6 +220,9 @@ __marimo__/
 .streamlit/secrets.toml
 
 # Config
-
 .config*
 **/.config*
+
+# Errata
+.DS_Store
+**/.DS_Store
