@@ -1,25 +1,34 @@
-# Tempus DB
+# Tempus Dash
 
-An open-source, Raspberry-Pi powered e-ink display, with multiple apps for the display and a web UI to manage them. The software, written in Python is designed for the Waveshare 7.5-inch e-ink display and the web UI is powered by Flask. 
+An open-source, Raspberry-Pi powered e-ink display, with multiple apps for the display and a web UI to manage them. The software, written in Python, is designed for the Waveshare 7.5-inch e-ink display and the web UI is powered by Flask. 
+
+![This is Tempus Dash](docs/img/tempus-dash-message.jpeg)
+
+## About Tempus Dash
+
+Tempus Dash is an internet connected e-ink display, powered by a Raspberry Pi. The software is written in Python 3 and the web UI is powered by Flask and written with HTML, CSS, JS. The web interface allows the user to control Tempus Dash from any device on their local network. Setting up the software will require some initial Terminal commands, but once installed, the software is easy to manage.
 
 ![Tempus Dashboard](docs/img/tempus-dash-v2.jpeg)
 
-## About Tempus DB
+## Say Hello to Tempus v2
 
-Tempus DB is a internet connected e-ink display, powered by a Raspberry Pi. The software is written in Python 3 (somewhat hackily) and the web UI is powered by Flask and written with HTML, CSS, JS. The interface allows the user to control Tempus app from any device on their local network. Setting up the software will require some initial Terminal commands, but once installed, the software is easy to manage.
+The Tempus Dash software has just received a major update. The code has been rewritten from scratch, with new dashboard apps, more efficient image rendering, a cleaner backend. The Cron-based utilities now use multiple fast refreshes between full refreshes to update the display. The web app also has new features including a clearer readout of the current app and chart logging the app history.
 
 **Tempus Dash Apps:**
 
 - Time-Weather Dashboard: displays the time as a 24-hr clock as well as the current weather and daily forecast at a regular interval.
-- Photo Display: display a photo uploaded to the Raspberry Pi via the web UI
+- Photo Display: display a photo uploaded to the Raspberry Pi via the web UI.
 - Photo Display from URL: display a photo from a URL input in the web app.
+- Word Clock: start up a simple 24-hour word clock that updates every minute using the newly implemented fast refresh.
+- QR Code Display: display a QR code of any text, including URLs and WiFi credentials.
+- Display Message: display a simple text message on the display, styled with Markdown.
 - Year Progress: display a progress bar indicating how much of the current year has passed.
 
 Expect more apps soon. And feel free to adapt the code yourself and add more apps.
 
 ## Tempus Hardware
 
-My Tempus uses an old Raspberry Pi 3b+ that I had from another project, and that is more than sufficient enough for running the apps and web UI server. For Tempus DB you will need:
+My Tempus uses an old Raspberry Pi 3b+ that I had from another project, and that is more than sufficient enough for running the apps and web UI server. For Tempus Dash you will need:
 
 - A Raspberry Pi 4 / 3 / Zero 2 WH
 - MicroUSB power adapter, 5V
@@ -39,10 +48,10 @@ After setting up your Raspberry Pi, installing the Waveshare utilities for the e
 	git clone https://github.com/cealigbe/tempusdash.git
 	```
 
-2. Navigate to the source code directory
+2. Navigate to the `tempusdash` folder
 
 	```bash
-	cd tempusdash/src
+	cd tempusdash/
 	```
 
 3. Install the Python requirements
@@ -51,29 +60,30 @@ After setting up your Raspberry Pi, installing the Waveshare utilities for the e
 	pip3 install -r requirements.txt
 	```
 
-4. To initialize the weather display, grab a free WeatherAPI key from [weatherapi.com](http://weatherapi.com), then add your location and new key to the config.py.temp file in the src folder. Then rename the config.py.temp file to "config.py". The weather script won't run otherwise.
+4. To initialize the weather display, grab a free WeatherAPI key from [weatherapi.com](http://weatherapi.com), then add your location and new key to the `config.toml` file in the `src/` folder. The weather script won't run otherwise.
 
-	```python
-	config = {
-		"location": "[your city]",
-		"apikey": "[your api key]",
-		...
-	}
+	```toml
+	...
+    # WeatherAPI location and API key
+    location = "[your city]"
+    apikey = "[your api key]"
+	...
 	```
 
-5. Run the quickstart.py script to initialize the time-weather dashboard. This will set up a cronjob to update the display every 10 minutes.
+5. Run the quickstart.py script in the `src/` folder to initialize the time-weather dashboard. This will set up a cronjob to update the display every 10 minutes.
 
 	```bash
+	cd src
 	python3 quickstart.py
 	```
 
-6. To set up the web app, open up the tempusapp.service file and replace the bracketed areas in these lines to point to your tempusdash directory and Pi username:
+6. To set up the web app, open up the tempusapp.service file in the `tempusdash/` foldder and replace the bracketed areas in these lines to point to your tempusdash directory and Pi username:
 
 	```
 	...
-	ExecStart=[/path/to]/tempusdash/src/manage/app.py
+	ExecStart=[/path/to/tempusdash]/src/manage/app.py
 	User=[your Pi username]
-	WorkingDirectory=[/path/to]/tempusdash/src/manage
+	WorkingDirectory=[/path/to/tempusdash]/src/manage
 	...
 	```
 
@@ -84,10 +94,10 @@ After setting up your Raspberry Pi, installing the Waveshare utilities for the e
 	sudo systemctl daemon-reload
 	```
 
-8. Ensure the Flask app is executable
+8. Ensure the Flask app is executable. The service will not run otherwise.
 
 	```bash
-	sudo chmod +x manage/app.py
+	sudo chmod +x [/path/to/tempusdash]/src/manage/app.py
 	```
 	
 9. Enable and start the tempusapp service. Then check the service to see if it is running.
@@ -100,11 +110,11 @@ After setting up your Raspberry Pi, installing the Waveshare utilities for the e
 	
 10. To access the web UI, visit [your Pi's IP address]:5555 on a browser on another device. For example, if your Pi's IP address is 10.0.0.10, or is called "tempuspi" visit, ```http://10.0.0.10:5555``` or ```http://tempuspi.local:5555```.
 
-	![Tempus Manager](docs/img/tempus-manager.png)
+	![Tempus Manager](docs/img/tempus-manager-v2.png)
 
 ## Future Features
 
-I am an amateur programmer, so the code base of Tempus is somewhat janky. It works well, but don't be surprised if there is a bug or two. In any case, I will be working to optimize the code as I notice weirdness. I will also incrementally add features as I see a need for them. Future apps to the Tempus Dash include:
+I am an amateur programmer, so the code base of Tempus is a work in progress. It functions well, but don't be surprised if there is a bug or two. In any case, I will be working to optimize the code as I notice weirdness. I will also incrementally add features as I see a need for them. Future apps to the Tempus Dash include:
 
 - Calendar
 - Word of the Day
@@ -124,6 +134,7 @@ This project is distributed under the MIT License, see [LICENSE](https://github.
 - Weather Icons: [Weather API Icons](https://www.figma.com/community/file/1102960831369614781/weather-api-icons) by Roman Davydko
 - Web UI Icons: [Lucide Icons](https://lucide.dev/)
 - Waveshare e-ink library by [Waveshare](https://www.waveshare.com/)
+- App History graph visualization library: [D3.js](https://d3js.org)
 
 ## Inspirations
 
